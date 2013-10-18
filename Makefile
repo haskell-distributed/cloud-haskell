@@ -9,9 +9,12 @@ REPOS=$(shell cat REPOS | sed '/^$$/d')
 .PHONY: all
 all: $(REPOS)
 
+.PHONY: clean
+clean:
+	rm -rf $(REPOS)
+
 $(REPOS):
 	git clone $(BASE_GIT)/$@.git
-	cd $@ && $(CABAL) install --with-ghc=$(GHC) --reinstall
 
 .PHONY: install
 install: $(REPOS)
