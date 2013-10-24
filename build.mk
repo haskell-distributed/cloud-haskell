@@ -3,12 +3,16 @@ CABAL ?= $(shell which cabal)
 CABAL_DEV ?= $(shell which cabal-dev)
 PWD = $(shell pwd)
 SANDBOX ?= $(PWD)/cabal-dev
-BRANCH=$(subst * ,,$(shell git branch))
+BRANCH=$(subst * ,,$(shell git branch | grep '*'))
 GIT_BASE ?= git://github.com/haskell-distributed
-USE_LOCAL_UMBRELLA ?=
+NO_LOCAL_UMBRELLA ?= FALSE
 TEST_SUITE ?=
 REPO_NAMES=$(shell cat REPOS | sed '/^$$/d')
 REPOS=$(patsubst %,$(PWD)/build/%.repo,$(REPO_NAMES))
+CONF=./dist/setup-config
+CABAL=distributed-process-platform.cabal
+BUILD_DEPENDS=$(CONF) $(CABAL)
+
 
 .PHONY: all
 all: install
@@ -16,6 +20,10 @@ all: install
 .PHONY: test
 test: $(REPOS)
 	$(CABAL_DEV) test $(TEST_SUITE) --show-details=always
+
+.PHONY: push
+push:
+	$(shell git push origin $(BRANCH))
 
 .PHONY: info
 info:
@@ -26,6 +34,16 @@ info:
 clean:
 	rm -rf ./build ./dist ./cabal-dev
 
+.PHONY: build
+compile: configure
+	$(CABAL_DEV) build
+
+.PHONY: configure
+configure: $(BUILD_DEPENDS)
+
+$(BUILD_DEPENDS):
+	$(CABAL_DEV) configure --enable-tests
+
 .PHONY: dev-install
 ifneq (,$(CABAL_DEV))
 install: $(REPOS)
@@ -35,13 +53,13 @@ install:
 	$(error install cabal-dev to proceed)
 endif
 
-ifneq (,$(USE_LOCAL_UMBRELLA))
+ifneq (,$(NO_LOCAL_UMBRELLA))
 define clone
-	git clone $(GIT_BASE)/$1 ./build/$1
+	git clone $(GIT_BASE)/$1.git ./build/$1
 endef
 else
 define clone
-    git clone $(GIT_BASE)/$1.git ./build/$1
+    git clone $(GIT_BASE)/$1 ./build/$1
 endef
 endif
 
