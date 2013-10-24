@@ -2,10 +2,17 @@ GHC ?= $(shell which ghc)
 CABAL ?= $(shell which cabal)
 CABAL_DEV ?= $(shell which cabal-dev)
 PWD = $(shell pwd)
-SANDBOX ?= $(PWD)/cabal-dev
 BRANCH=$(subst * ,,$(shell git branch | grep '*'))
+
+ifneq (,$(LOCAL))
+BASE_DIR ?= $(shell dirname `pwd`)
+GIT_BASE ?= $(BASE_DIR)
+SANDBOX ?= $(GIT_BASE)/cabal-dev
+else
+SANDBOX ?= $(PWD)/cabal-dev
 GIT_BASE ?= git://github.com/haskell-distributed
-NO_LOCAL_UMBRELLA ?= FALSE
+endif
+
 TEST_SUITE ?=
 REPO_NAMES=$(shell cat REPOS | sed '/^$$/d')
 REPOS=$(patsubst %,$(PWD)/build/%.repo,$(REPO_NAMES))
@@ -27,6 +34,7 @@ push:
 
 .PHONY: info
 info:
+	$(info git-base = ${GIT_BASE})
 	$(info branch = ${BRANCH})
 	$(info ghc = ${GHC})
 
@@ -53,15 +61,19 @@ install:
 	$(error install cabal-dev to proceed)
 endif
 
-ifneq (,$(NO_LOCAL_UMBRELLA))
+ifneq (,$(LOCAL))
+
+%.repo: ./build
+	git --git-dir=$(GIT_BASE)/$(*F)/.git \
+		--work-tree=$(GIT_BASE)/$(*F) \
+		checkout $(BRANCH)
+	cd $(GIT_BASE)/$(*F) && $(CABAL_DEV) install --sandbox=$(SANDBOX)
+	touch $@
+
+else
 define clone
 	git clone $(GIT_BASE)/$1.git ./build/$1
 endef
-else
-define clone
-    git clone $(GIT_BASE)/$1 ./build/$1
-endef
-endif
 
 %.repo:
 	$(call clone,$(*F))
@@ -70,6 +82,7 @@ endif
 		checkout $(BRANCH)
 	cd $(@D)/$(*F) && $(CABAL_DEV) install --sandbox=$(SANDBOX)
 	touch $@
+endif
 
 ./build:
 	mkdir -p build
