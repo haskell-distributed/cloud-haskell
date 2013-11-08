@@ -40,36 +40,44 @@ info:
 
 .PHONY: clean
 clean:
-	rm -rf ./build ./dist ./cabal-dev
+	rm -rf ./build ./dist
+
+.PHONY: dist-clean
+dist-clean:
+	rm -rf $(SANDBOX)
 
 .PHONY: build
-compile: configure
+compile: $(REPOS) configure
 	$(CABAL_DEV) build
 
 .PHONY: configure
-configure: $(BUILD_DEPENDS)
+configure: $(BUILD_DEPENDS) ensure-dirs
 
 $(BUILD_DEPENDS):
-	$(CABAL_DEV) configure --enable-tests
+	$(CABAL_DEV) configure --enable-tests --sandbox=$(SANDBOX)
 
 .PHONY: dev-install
 ifneq (,$(CABAL_DEV))
-install: $(REPOS)
-	$(CABAL_DEV) install --enable-tests
+install: ensure-dirs $(REPOS)
+	$(CABAL_DEV) install --enable-tests --sandbox=$(SANDBOX)
 else
 install:
 	$(error install cabal-dev to proceed)
 endif
 
 ifneq (,$(LOCAL))
-
-%.repo: ./build
+ifneq (,$(SKIP_DEPS))
+%.repo:
 	git --git-dir=$(GIT_BASE)/$(*F)/.git \
 		--work-tree=$(GIT_BASE)/$(*F) \
 		checkout $(BRANCH)
 	cd $(GIT_BASE)/$(*F) && $(CABAL_DEV) install --sandbox=$(SANDBOX)
 	touch $@
-
+else
+%.repo:
+	$(CABAL_DEV) add-source $(GIT_BASE)/$(*F)
+	touch $@
+endif
 else
 define clone
 	git clone $(GIT_BASE)/$1.git ./build/$1
@@ -84,5 +92,5 @@ endef
 	touch $@
 endif
 
-./build:
-	mkdir -p build
+ensure-dirs:
+	mkdir -p $(PWD)/build
