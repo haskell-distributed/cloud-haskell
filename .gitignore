@@ -3,3 +3,10 @@ network-transport*
 rank1dynamic
 distributed-static
 azure-service-api
+distributed-process
+distributed-process-platform
+distributed-process-demos
+distributed-process-simplelocalnet
+distributed-process-tests
+packages*
+.cabal-sandbox

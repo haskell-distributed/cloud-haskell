@@ -1,32 +1,26 @@
 GHC ?= $(shell which ghc)
 CABAL ?= $(shell which cabal)
-CABAL_DEV ?= $(shell which cabal-dev)
 PWD = $(shell pwd)
 BRANCH=$(subst * ,,$(shell git branch | grep '*'))
 
 ifneq (,$(LOCAL))
 BASE_DIR ?= $(shell dirname `pwd`)
 GIT_BASE ?= $(BASE_DIR)
-SANDBOX ?= $(GIT_BASE)/cabal-dev
+SANDBOX ?= $(GIT_BASE)/.cabal-sandbox
 else
-SANDBOX ?= $(PWD)/cabal-dev
+SANDBOX ?= $(PWD)/.cabal-sandbox
 GIT_BASE ?= git://github.com/haskell-distributed
 endif
 
+SANDBOX_CONFIG=cabal.sandbox.config
 TEST_SUITE ?=
 REPO_NAMES=$(shell cat REPOS | sed '/^$$/d')
 REPOS=$(patsubst %,$(PWD)/build/%.repo,$(REPO_NAMES))
 CONF=./dist/setup-config
-CABAL=distributed-process-platform.cabal
-BUILD_DEPENDS=$(CONF) $(CABAL)
-
+BUILD_DEPENDS=ensure-dirs $(REPOS) $(SANDBOX) $(CONF)
 
 .PHONY: all
 all: install
-
-.PHONY: test
-test: $(REPOS)
-	$(CABAL_DEV) test $(TEST_SUITE) --show-details=always
 
 .PHONY: push
 push:
@@ -37,33 +31,35 @@ info:
 	$(info git-base = ${GIT_BASE})
 	$(info branch = ${BRANCH})
 	$(info ghc = ${GHC})
+	$(info cabal = ${CABAL})
 
 .PHONY: clean
 clean:
-	rm -rf ./build ./dist
+	$(CABAL) clean
 
 .PHONY: dist-clean
-dist-clean:
-	rm -rf $(SANDBOX)
+dist-clean: clean
+	$(CABAL) sandbox delete --sandbox=$(SANDBOX)
+	rm -rf build
 
 .PHONY: build
-compile: $(REPOS) configure
-	$(CABAL_DEV) build
+compile: $(BUILD_DEPENDS)
+	$(CABAL) build
 
-.PHONY: configure
-configure: $(BUILD_DEPENDS) ensure-dirs
+.PHONY: test
+test: $(BUILD_DEPENDS)
+	$(CABAL) test $(TEST_SUITE) --show-details=always
 
-$(BUILD_DEPENDS):
-	$(CABAL_DEV) configure --enable-tests --sandbox=$(SANDBOX)
+$(CONF): ensure-dirs
+	$(CABAL) configure --enable-tests
 
-.PHONY: dev-install
-ifneq (,$(CABAL_DEV))
+$(SANDBOX): $(SANDBOX_CONFIG) install
+
+$(SANDBOX_CONFIG):
+	$(CABAL) sandbox init --sandbox=$(SANDBOX)
+
 install: ensure-dirs $(REPOS)
-	$(CABAL_DEV) install --enable-tests --sandbox=$(SANDBOX)
-else
-install:
-	$(error install cabal-dev to proceed)
-endif
+	$(CABAL) install --enable-tests
 
 ifneq (,$(LOCAL))
 ifneq (,$(SKIP_DEPS))
@@ -71,14 +67,15 @@ ifneq (,$(SKIP_DEPS))
 	git --git-dir=$(GIT_BASE)/$(*F)/.git \
 		--work-tree=$(GIT_BASE)/$(*F) \
 		checkout $(BRANCH)
-	cd $(GIT_BASE)/$(*F) && $(CABAL_DEV) install --sandbox=$(SANDBOX)
+	cd $(GIT_BASE)/$(*F) && $(CABAL) sandbox add-source $(GIT_BASE)/$(*F) --sandbox=$(SANDBOX)
 	touch $@
 else
 %.repo:
-	$(CABAL_DEV) add-source $(GIT_BASE)/$(*F)
+	$(CABAL) sandbox add-source $(GIT_BASE)/$(*F)
 	touch $@
 endif
 else
+
 define clone
 	git clone $(GIT_BASE)/$1.git ./build/$1
 endef
@@ -88,9 +85,10 @@ endef
 	git --git-dir=$(@D)/$(*F)/.git \
 		--work-tree=$(@D)/$(*F) \
 		checkout $(BRANCH)
-	cd $(@D)/$(*F) && $(CABAL_DEV) install --sandbox=$(SANDBOX)
+	cd $(@D)/$(*F) && $(CABAL) sandbox add-source $(@D)/$(*F) --sandbox=$(SANDBOX)
 	touch $@
 endif
 
 ensure-dirs:
 	mkdir -p $(PWD)/build
+
