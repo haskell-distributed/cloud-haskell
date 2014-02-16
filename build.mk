@@ -12,7 +12,7 @@ SANDBOX ?= $(PWD)/.cabal-sandbox
 GIT_BASE ?= git://github.com/haskell-distributed
 endif
 
-SANDBOX_CONFIG=cabal.sandbox.config
+SANDBOX_CONFIG=$(PWD)/cabal.sandbox.config
 TEST_SUITE ?=
 REPO_NAMES=$(shell cat REPOS | sed '/^$$/d')
 REPOS=$(patsubst %,$(PWD)/build/%.repo,$(REPO_NAMES))
@@ -32,6 +32,7 @@ info:
 	$(info branch = ${BRANCH})
 	$(info ghc = ${GHC})
 	$(info cabal = ${CABAL})
+	$(info depends = ${BUILD_DEPENDS})
 
 .PHONY: clean
 clean:
@@ -39,8 +40,10 @@ clean:
 
 .PHONY: dist-clean
 dist-clean: clean
-	$(CABAL) sandbox delete --sandbox=$(SANDBOX)
 	rm -rf build
+	$(shell ${CABAL} sandbox delete --sandbox=${SANDBOX})
+	rm -rf $(SANDBOX)
+
 
 .PHONY: build
 compile: $(BUILD_DEPENDS)
@@ -62,25 +65,19 @@ install: ensure-dirs $(REPOS)
 	$(CABAL) install --enable-tests
 
 ifneq (,$(LOCAL))
-ifneq (,$(SKIP_DEPS))
-%.repo:
+%.repo: $(SANDBOX_CONFIG)
 	git --git-dir=$(GIT_BASE)/$(*F)/.git \
 		--work-tree=$(GIT_BASE)/$(*F) \
 		checkout $(BRANCH)
-	cd $(GIT_BASE)/$(*F) && $(CABAL) sandbox add-source $(GIT_BASE)/$(*F) --sandbox=$(SANDBOX)
-	touch $@
-else
-%.repo:
 	$(CABAL) sandbox add-source $(GIT_BASE)/$(*F)
 	touch $@
-endif
 else
 
 define clone
 	git clone $(GIT_BASE)/$1.git ./build/$1
 endef
 
-%.repo:
+%.repo: $(SANDBOX_CONFIG)
 	$(call clone,$(*F))
 	git --git-dir=$(@D)/$(*F)/.git \
 		--work-tree=$(@D)/$(*F) \
