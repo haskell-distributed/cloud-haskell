@@ -1,0 +1,67 @@
+Name:                cloud-haskell
+Version:             0.0.1.0
+synopsis:            The Cloud Haskell Application Platform
+Description:         Cloud Haskell is a set of libraries that bring Erlang-style
+                     concurrency and distribution to Haskell programs. This
+                     project is an implementation of that distributed computing
+                     interface, where processes communicate with one another through
+                     explicit message passing rather than shared memory.
+                     .
+                     This package is just a convenient wrapper
+                     around the @distributed-process-platform@, @distributed-process@ and
+                     @network-transport@ packages, so they can be
+                     installed with a single @cabal install cloud-haskell@
+                     command.
+                     .
+                     The package also comes with flags to enable
+                     different @Network.Transport@ and /Cloud Haskell/
+                     (network topology) backends.
+Homepage:            http://github.com/haskell-distributed/cloud-haskell
+Bug-Reports:         http://cloud-haskell.atlassian.net/
+License:             BSD3
+License-file:        LICENSE
+Author:              Tim Watson
+Maintainer:          watson.timothy@gmail.com
+Category:            Control
+Build-type:          Simple
+Cabal-version:       >=1.10
+Extra-source-files:  README.md
+
+Source-repository head
+  type:     git
+  location: git://github.com/haskell-distribute/cloud-haskell.git
+
+Flag tcp
+  Description: Enable the network-transport-tcp Network.Transport backend
+  Default: False
+  Manual:  True
+
+Flag simplelocalnet
+  Description: Enable the network-transport-simplelocalnet cloud haskell backend
+  Default: False
+  Manual:  True
+
+Flag p2p
+  Description: Enable the Haskell-native SVG backend
+  Default: True
+  Manual:  True
+
+Library
+  Build-depends:     
+                     rank1dynamic >= 0.1 && < 0.2,
+                     distributed-static >= 0.2 && < 0.3,                     
+                     network-transport >= 0.3 && < 0.4,
+                     distributed-process >= 0.4.2,
+                     distributed-process-platform >= 0.1.0 && < 0.2
+
+  if flag(tcp)
+    Build-depends:   network-transport-tcp >= 0.3 && < 0.4
+
+  if flag(simplelocalnet)
+    Build-depends:   distributed-process-simplelocalnet >= 0.2.0.9 && < 0.3
+
+  if flag(p2p)
+    Build-depends:   distributed-process-p2p >= 0.1.2.2
+
+  Default-language:  Haskell2010
+
