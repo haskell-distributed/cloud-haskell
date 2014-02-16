@@ -12,10 +12,12 @@ SANDBOX ?= $(PWD)/.cabal-sandbox
 GIT_BASE ?= git://github.com/haskell-distributed
 endif
 
+BUILD_DIR ?= $(PWD)/build
+
 SANDBOX_CONFIG=$(PWD)/cabal.sandbox.config
 TEST_SUITE ?=
 REPO_NAMES=$(shell cat REPOS | sed '/^$$/d')
-REPOS=$(patsubst %,$(PWD)/build/%.repo,$(REPO_NAMES))
+REPOS=$(patsubst %,$(BUILD_DIR)/%.repo,$(REPO_NAMES))
 CONF=./dist/setup-config
 BUILD_DEPENDS=ensure-dirs $(REPOS) $(SANDBOX) $(CONF)
 
@@ -74,7 +76,7 @@ ifneq (,$(LOCAL))
 else
 
 define clone
-	git clone $(GIT_BASE)/$1.git ./build/$1
+	git clone $(GIT_BASE)/$1.git $(BUILD_DIR)/$1
 endef
 
 %.repo: $(SANDBOX_CONFIG)
@@ -82,10 +84,10 @@ endef
 	git --git-dir=$(@D)/$(*F)/.git \
 		--work-tree=$(@D)/$(*F) \
 		checkout $(BRANCH)
-	cd $(@D)/$(*F) && $(CABAL) sandbox add-source $(@D)/$(*F) --sandbox=$(SANDBOX)
+	$(CABAL) sandbox add-source $(@D)/$(*F) --sandbox=$(SANDBOX)
 	touch $@
 endif
 
 ensure-dirs:
-	mkdir -p $(PWD)/build
+	mkdir -p $(BUILD_DIR)
 

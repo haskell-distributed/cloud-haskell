@@ -1,4 +1,4 @@
-Copyright Well-Typed LLP, 2011-2012
+Copyright Well-Typed LLP, 2011-2012, Tim Watson, 2012-2014
 
 All rights reserved.
 

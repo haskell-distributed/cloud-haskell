@@ -10,3 +10,6 @@ distributed-process-simplelocalnet
 distributed-process-tests
 packages*
 .cabal-sandbox
+*.repo
+cabal.sandbox.config
+

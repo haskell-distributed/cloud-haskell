@@ -19,7 +19,7 @@ Description:         Cloud Haskell is a set of libraries that bring Erlang-style
 Homepage:            http://github.com/haskell-distributed/cloud-haskell
 Bug-Reports:         http://cloud-haskell.atlassian.net/
 License:             BSD3
-License-file:        LICENSE
+License-file:        LICENSE.md
 Author:              Tim Watson
 Maintainer:          watson.timothy@gmail.com
 Category:            Control
@@ -37,13 +37,13 @@ Flag tcp
   Manual:  True
 
 Flag simplelocalnet
-  Description: Enable the network-transport-simplelocalnet cloud haskell backend
+  Description: Enable the simplelocalnet cloud haskell (topology) backend
   Default: False
   Manual:  True
 
 Flag p2p
-  Description: Enable the Haskell-native SVG backend
-  Default: True
+  Description: Enable the p2p cloud haskell (topology) backend
+  Default: False
   Manual:  True
 
 Library
