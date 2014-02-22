@@ -21,6 +21,7 @@ REPO_NAMES=$(shell cat REPOS | sed '/^$$/d')
 REPOS=$(patsubst %,$(BUILD_DIR)/%/.git/,$(REPO_NAMES))
 CONF=./dist/setup-config
 BUILD_DEPENDS=$(REPOS) $(SANDBOX) $(CONF)
+CABAL_EXTRA ?=
 
 .PHONY: all
 all: install
@@ -64,7 +65,7 @@ $(SANDBOX_CONFIG):
 	$(CABAL) sandbox init --sandbox=$(SANDBOX)
 
 install-deps: $(REPOS)
-	$(CABAL) install --enable-tests --only-dependencies
+	$(CABAL) install --enable-tests --only-dependencies $(CABAL_EXTRA)
 
 install: $(REPOS)
 	$(CABAL) install --force-reinstalls
