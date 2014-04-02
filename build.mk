@@ -22,6 +22,7 @@ REPOS=$(patsubst %,$(BUILD_DIR)/%/.git/,$(REPO_NAMES))
 CONF=./dist/setup-config
 BUILD_DEPENDS=$(REPOS) $(SANDBOX) $(CONF)
 CABAL_EXTRA ?=
+PACKAGE ?=
 
 .PHONY: all
 all: install
@@ -57,18 +58,21 @@ test: $(BUILD_DEPENDS)
 	$(CABAL) test $(TEST_SUITE) --show-details=always
 
 $(CONF):
-	$(CABAL) configure --enable-tests
+	$(CABAL) configure --enable-tests $(CABAL_EXTRA)
 
 $(SANDBOX): $(SANDBOX_CONFIG)
 
 $(SANDBOX_CONFIG):
 	$(CABAL) sandbox init --sandbox=$(SANDBOX)
 
-install-deps: $(REPOS)
+install-deps: $(REPOS) $(SANDBOX)
 	$(CABAL) install --enable-tests --only-dependencies $(CABAL_EXTRA)
 
-install: $(REPOS)
-	$(CABAL) install --force-reinstalls
+install: $(REPOS) $(SANDBOX)
+	$(CABAL) install $(CABAL_EXTRA)
+
+unregister: $(SANDBOX)
+	$(CABAL) sandbox hc-pkg unregister $(PACKAGE) --sandbox=$(SANDBOX)
 
 define repo_name
 	$(lastword $(subst /, ,$1))
