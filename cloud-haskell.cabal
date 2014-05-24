@@ -48,14 +48,14 @@ Flag p2p
 
 Library
   Build-depends:     
-                     rank1dynamic >= 0.1 && < 0.2,
-                     distributed-static >= 0.2 && < 0.3,
-                     network-transport >= 0.3 && < 0.4,
-                     distributed-process >= 0.4.2,
+                     rank1dynamic >= 0.1 && < 0.3,
+                     distributed-static >= 0.2 && < 0.4,
+                     network-transport >= 0.4.0.0 && < 0.5,
+                     distributed-process >= 0.5.0,
                      distributed-process-platform >= 0.1.0 && < 0.2
 
   if flag(tcp)
-    Build-depends:   network-transport-tcp >= 0.3 && < 0.4
+    Build-depends:   network-transport-tcp >= 0.3 && < 0.5
 
   if flag(simplelocalnet)
     Build-depends:   distributed-process-simplelocalnet >= 0.2.0.9 && < 0.3
