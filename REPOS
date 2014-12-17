@@ -7,6 +7,12 @@ rank1dynamic
 distributed-static
 distributed-process
 distributed-process-platform
+distributed-process-extras
+distributed-process-async
+distributed-process-client-server
+distributed-process-supervisor
+distributed-process-task
+distributed-process-execution
 distributed-process-tests
 azure-service-api
 distributed-process-azure
