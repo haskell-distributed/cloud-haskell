@@ -1,5 +1,5 @@
 Name:                cloud-haskell
-Version:             0.0.1.0
+Version:             0.2.0.0
 synopsis:            The Cloud Haskell Application Platform
 Description:         Cloud Haskell is a set of libraries that bring Erlang-style
                      concurrency and distribution to Haskell programs. This
