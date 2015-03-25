@@ -53,7 +53,7 @@ Library
                      network-transport >= 0.4.1.0 && < 0.5,
                      distributed-process >= 0.5.0 && < 0.6,
                      distributed-process-extras >= 0.1.1 && < 0.2,
-                     distributed-process-async >= 0.2.0 && < 0.2,
+                     distributed-process-async >= 0.2.0 && < 0.3,
                      distributed-process-client-server >= 0.1.1 && < 0.2,
                      distributed-process-supervisor >= 0.1.1 && < 0.2,
                      distributed-process-task >= 0.1.0 && < 0.2,
