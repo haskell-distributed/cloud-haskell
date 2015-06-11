@@ -1,5 +1,5 @@
 Name:                cloud-haskell
-Version:             0.2.0.0
+Version:             0.2.1.0
 synopsis:            The Cloud Haskell Application Platform
 Description:         Cloud Haskell is a set of libraries that bring Erlang-style
                      concurrency and distribution to Haskell programs. This
@@ -47,12 +47,12 @@ Flag p2p
   Manual:  True
 
 Library
-  Build-depends:     
-                     rank1dynamic >= 0.2.0.0 && < 0.3,
+  Build-depends:
+                     rank1dynamic >= 0.2.0.0 && < 0.4,
                      distributed-static >= 0.3.0.0 && < 0.4,
                      network-transport >= 0.4.1.0 && < 0.5,
                      distributed-process >= 0.5.0 && < 0.6,
-                     distributed-process-extras >= 0.1.1 && < 0.2,
+                     distributed-process-extras >= 0.1.1 && < 0.3,
                      distributed-process-async >= 0.2.0 && < 0.3,
                      distributed-process-client-server >= 0.1.1 && < 0.2,
                      distributed-process-supervisor >= 0.1.1 && < 0.2,
