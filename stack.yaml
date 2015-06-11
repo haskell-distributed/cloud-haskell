@@ -1,0 +1,74 @@
+packages:
+- .
+- location:
+    git: git@github.com:haskell-distributed/network-transport
+    commit: master
+- location:
+    git: git@github.com:haskell-distributed/network-transport-composed
+    commit: master
+# disabled due to the failing tests
+#- location:
+#    git: git@github.com:haskell-distributed/network-transport-inmemory
+#    commit: 45937f8
+- location:
+    git: git@github.com:haskell-distributed/network-transport-tcp
+    commit: master
+- location:
+    git: git@github.com:haskell-distributed/network-transport-tests
+    commit: master
+- location:
+    git: git@github.com:haskell-distributed/rank1dynamic
+    commit: master
+- location:
+    git: git@github.com:haskell-distributed/distributed-static
+    commit: master
+- location:
+    git: git@github.com:haskell-distributed/distributed-process
+    commit: master
+#- location:
+#    git: git@github.com:haskell-distributed/distributed-process-platform
+#    commit: master
+- location:
+    #git: git@github.com:haskell-distributed/distributed-process-extras
+    git: git@github.com:qnikst/distributed-process-extras
+    commit: '98d0322'
+- location:
+    #git: git@github.com:haskell-distributed/distributed-process-async
+    git: git@github.com:qnikst/distributed-process-async
+    commit: '92ec05f'
+- location:
+  #git: git@github.com:haskell-distributed/distributed-process-client-server
+    git: git@github.com:qnikst/distributed-process-client-server
+    commit: '68d810e'
+- location:
+  #git: git@github.com:haskell-distributed/distributed-process-supervisor
+    git: git@github.com:qnikst/distributed-process-supervisor
+    commit: 'f6a1f62'
+- location:
+  #git: git@github.com:haskell-distributed/distributed-process-task
+    git: git@github.com:qnikst/distributed-process-task
+    commit: '1e50e84'
+- location:
+  #git: git@github.com:haskell-distributed/distributed-process-execution
+    git: git@github.com:qnikst/distributed-process-execution
+    commit: 'abd9371'
+- location:
+    git: git@github.com:haskell-distributed/distributed-process-tests
+    commit: master
+- location:
+    git: git@github.com:haskell-distributed/distributed-process-simplelocalnet
+    commit: master
+# blocked by dependencies upstream
+#- location:
+#    git: git@github.com:haskell-distributed/azure-service-api.git
+#    commit: master
+#- location:
+#    git: git@github.com:haskell-distributed/distributed-process-azure
+#    commit: master
+#- location:
+#    git: git@github.com:haskell-distributed/azure-service-api
+#    commit: master
+#- location:
+#    git: git@github.com:haskell-distributed/distributed-process-demos
+#    commit: master
+resolver: nightly-2015-06-05
