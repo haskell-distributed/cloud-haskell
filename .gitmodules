@@ -1,0 +1,60 @@
+[submodule "network-transport"]
+	path = network-transport
+	url = git@github.com:haskell-distributed/network-transport
+[submodule "network-transport-composed"]
+	path = network-transport-composed
+	url = git@github.com:haskell-distributed/network-transport-composed
+[submodule "network-transport-inmemory"]
+	path = network-transport-inmemory
+	url = git@github.com:haskell-distributed/network-transport-inmemory
+[submodule "network-transport-tcp"]
+	path = network-transport-tcp
+	url = git@github.com:haskell-distributed/network-transport-tcp
+[submodule "network-transport-tests"]
+	path = network-transport-tests
+	url = git@github.com:haskell-distributed/network-transport-tests
+[submodule "rank1dynamic"]
+	path = rank1dynamic
+	url = git@github.com:haskell-distributed/rank1dynamic
+[submodule "distributed-static"]
+	path = distributed-static
+	url = git@github.com:haskell-distributed/distributed-static
+[submodule "distributed-process"]
+	path = distributed-process
+	url = git@github.com:haskell-distributed/distributed-process
+[submodule "distributed-process-platform"]
+	path = distributed-process-platform
+	url = git@github.com:haskell-distributed/distributed-process-platform
+[submodule "distributed-process-extras"]
+	path = distributed-process-extras
+	url = git@github.com:haskell-distributed/distributed-process-extras
+[submodule "distributed-process-async"]
+	path = distributed-process-async
+	url = git@github.com:haskell-distributed/distributed-process-async
+[submodule "distributed-process-client-server"]
+	path = distributed-process-client-server
+	url = git@github.com:haskell-distributed/distributed-process-client-server
+[submodule "distributed-process-supervisor"]
+	path = distributed-process-supervisor
+	url = git@github.com:haskell-distributed/distributed-process-supervisor
+[submodule "distributed-process-task"]
+	path = distributed-process-task
+	url = git@github.com:haskell-distributed/distributed-process-task
+[submodule "distributed-process-execution"]
+	path = distributed-process-execution
+	url = git@github.com:haskell-distributed/distributed-process-execution
+[submodule "distributed-process-tests"]
+	path = distributed-process-tests
+	url = git@github.com:haskell-distributed/distributed-process-tests
+[submodule "azure-service-api"]
+	path = azure-service-api
+	url = git@github.com:haskell-distributed/azure-service-api
+[submodule "distributed-process-azure"]
+	path = distributed-process-azure
+	url = git@github.com:haskell-distributed/distributed-process-azure
+[submodule "distributed-process-demos"]
+	path = distributed-process-demos
+	url = git@github.com:haskell-distributed/distributed-process-demos
+[submodule "distributed-process-simplelocalnet"]
+	path = distributed-process-simplelocalnet
+	url = git@github.com:haskell-distributed/distributed-process-simplelocalnet
