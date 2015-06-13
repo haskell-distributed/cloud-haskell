@@ -58,3 +58,6 @@
 [submodule "distributed-process-simplelocalnet"]
 	path = distributed-process-simplelocalnet
 	url = https://github.com/haskell-distributed/distributed-process-simplelocalnet
+[submodule "distributed-process-p2p"]
+	path = distributed-process-p2p
+	url = https://bitbucket.org/dpwiz/distributed-process-p2p.git

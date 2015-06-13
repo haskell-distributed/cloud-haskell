@@ -7,6 +7,7 @@ packages:
 - distributed-process-demos
 - distributed-process-execution
 - distributed-process-extras
+- distributed-process-p2p
 - distributed-process-simplelocalnet
 - distributed-process-supervisor
 - distributed-process-task
