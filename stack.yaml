@@ -8,6 +8,7 @@ packages:
 - distributed-process-execution
 - distributed-process-extras
 - distributed-process-p2p
+- distributed-process-registry
 - distributed-process-simplelocalnet
 - distributed-process-supervisor
 - distributed-process-task
