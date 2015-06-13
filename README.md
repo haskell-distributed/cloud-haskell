@@ -19,10 +19,20 @@ $ cabal install cloud-haskell
 Clone this repository locally using `git` or [`hub`][hub]. Then,
 
 ```
+$ git submodule update --init
 $ stack build
 ```
 
-You will need [Stack][stack] installed and reachable from your `$PATH`.
+You will need [Stack][stack] installed and reachable from your
+`$PATH`.
 
 [hub]: https://hub.github.com/
 [stack]: https://github.com/commercialhaskell/stack
+
+### Updating the source
+
+To hack on the latest versions of all packages,
+
+```
+$ git submodule update --remote
+```
