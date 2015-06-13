@@ -1,5 +1,6 @@
 resolver: nightly-2015-06-12
 packages:
+- .
 - distributed-process
 - distributed-process-async
 - distributed-process-client-server
