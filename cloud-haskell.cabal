@@ -1,5 +1,5 @@
 Name:                cloud-haskell
-Version:             0.2.0.0
+Version:             0.2.2
 synopsis:            The Cloud Haskell Application Platform
 Description:         Cloud Haskell is a set of libraries that bring Erlang-style
                      concurrency and distribution to Haskell programs. This
@@ -21,7 +21,7 @@ Bug-Reports:         http://cloud-haskell.atlassian.net/
 License:             BSD3
 License-file:        LICENSE.md
 Author:              Tim Watson
-Maintainer:          watson.timothy@gmail.com
+Maintainer:          Facundo Domínguez <facundo.dominguez@tweag.io>
 Category:            Control
 Build-type:          Simple
 Cabal-version:       >=1.10
