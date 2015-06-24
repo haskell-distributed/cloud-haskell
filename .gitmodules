@@ -61,3 +61,6 @@
 [submodule "distributed-process-p2p"]
 	path = distributed-process-p2p
 	url = https://bitbucket.org/dpwiz/distributed-process-p2p.git
+[submodule "network-transport-benchmarks"]
+	path = network-transport-benchmarks
+	url = https://github.com/haskell-distributed/network-transport-benchmarks.git
