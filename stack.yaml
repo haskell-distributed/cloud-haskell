@@ -18,6 +18,7 @@ packages:
 - network-transport-inmemory
 - network-transport-tcp
 - network-transport-tests
+- network-transport-benchmarks
 - rank1dynamic
 # TODO Out-of-date packages
 # - azure-service-api
