@@ -1,4 +1,16 @@
+tags
+TAGS
+.DS_Store
+\#*#
+*~
+*.aux
+*.hp
+*.hi
+*.o
+*.prof
+*.ps
+*.swp
 dist/
 .cabal-sandbox
 cabal.sandbox.config
-.stack*
+/.stack-work
