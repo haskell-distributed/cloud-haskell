@@ -19,7 +19,7 @@ Description:         Cloud Haskell is a set of libraries that bring Erlang-style
 Homepage:            http://github.com/haskell-distributed/cloud-haskell
 Bug-Reports:         http://cloud-haskell.atlassian.net/
 License:             BSD3
-License-file:        LICENSE.md
+License-file:        LICENSE
 Author:              Tim Watson
 Maintainer:          watson.timothy@gmail.com
 Category:            Control
