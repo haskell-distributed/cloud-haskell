@@ -1,10 +1,11 @@
-# Cloud Haskell build umbrella
+# Cloud Haskell meta-project
 
 [![Build Status](https://travis-ci.org/haskell-distributed/cloud-haskell.svg?branch=master)](https://travis-ci.org/haskell-distributed/cloud-haskell)
 
 This repository includes references to all other official Cloud
 Haskell packages for conveniently building them all from a single
-location.
+location. Use this repository as a starting point for hacking on Cloud
+Haskell packages (see [CONTRIBUTING.md](CONTRIBUTING.md)).
 
 ## Usage
 
@@ -36,3 +37,7 @@ To hack on the latest versions of all packages,
 ```
 $ git submodule update --remote
 ```
+
+## Contributing to Cloud Haskell
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
