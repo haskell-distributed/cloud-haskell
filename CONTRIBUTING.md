@@ -1,6 +1,6 @@
 # Cloud Haskell contributor guidelines
 
-See [README][README.md] for how to build from source.
+See [README](README.md) for how to build from source.
 
 The Cloud Haskell project is made up of a number of independent
 repositories. The cloud-haskell repository includes all other
