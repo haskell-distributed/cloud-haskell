@@ -29,10 +29,16 @@ $ cabal install cloud-haskell
 
 ### Building from source
 
-Clone this repository locally using `git` or [`hub`][hub]. Then,
+Clone this repository locally using `git` or [`hub`][hub]:
 
 ```
-$ git submodule update --init
+$ hub clone --recursive haskell-distributed/cloud-haskell
+```
+
+Then,
+
+```
+$ cd cloud-haskell
 $ stack build
 ```
 
