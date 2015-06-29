@@ -1,10 +1,13 @@
 # Cloud Haskell contributor guidelines
 
+See [README][README.md] for how to build from source.
+
 The Cloud Haskell project is made up of a number of independent
 repositories. The cloud-haskell repository includes all other
 repositories as submodules, for convenience. If you want to hack on
 any Cloud Haskell package and contribute changes upstream, don't
-checkout each individual repository in its own directory. Instead,
+checkout each individual repository in its own directory. Instead (if
+you have [hub][hub] installed),
 
 ```
 $ hub clone --recursive haskell-distributed/cloud-haskell
@@ -13,6 +16,8 @@ $ hub clone --recursive haskell-distributed/cloud-haskell
 which clones all Cloud Haskell repositories as submodules inside the
 `cloud-haskell` directory. You can then hack on each submodule as
 usual, committing as usual.
+
+[hub]: https://hub.github.com/
 
 ## Contributing changes upstream
 
