@@ -42,7 +42,7 @@ $ cd cloud-haskell
 $ stack build
 ```
 
-You will need [Stack][stack] installed and reachable from your
+You will need [stack][stack] installed and reachable from your
 `$PATH`.
 
 [hub]: https://hub.github.com/
