@@ -29,6 +29,8 @@ flags:
   distributed-process-demos:
     # Azure packages don't compile anymore.
     use-azure: False
+  distributed-process-tests:
+    tcp: True
 
 extra-deps:
 - rematch-0.2.0.0
