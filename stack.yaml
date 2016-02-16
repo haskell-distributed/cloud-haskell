@@ -26,6 +26,8 @@ packages:
 # - distributed-process-azure
 
 flags:
+  distributed-process-tests:
+    tcp: true
   distributed-process-demos:
     # Azure packages don't compile anymore.
     use-azure: False
