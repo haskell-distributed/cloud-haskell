@@ -48,7 +48,7 @@ Flag p2p
 
 Library
   Build-depends:
-    distributed-process == 0.5.*,
+    distributed-process == 0.6.*,
     distributed-process-async == 0.2.*,
     distributed-process-client-server == 0.1.*,
     distributed-process-execution == 0.1.*,

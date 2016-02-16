@@ -1,7 +1,8 @@
-resolver: nightly-2015-06-12
+resolver: lts-4.2
 packages:
 - .
 - distributed-process
+- distributed-process/distributed-process-tests
 - distributed-process-async
 - distributed-process-client-server
 - distributed-process-demos
@@ -12,7 +13,6 @@ packages:
 - distributed-process-simplelocalnet
 - distributed-process-supervisor
 - distributed-process-task
-- distributed-process-tests
 - distributed-static
 - network-transport
 - network-transport-composed
