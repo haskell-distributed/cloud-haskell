@@ -43,9 +43,6 @@
 [submodule "distributed-process-execution"]
 	path = distributed-process-execution
 	url = https://github.com/haskell-distributed/distributed-process-execution
-[submodule "distributed-process-tests"]
-	path = distributed-process-tests
-	url = https://github.com/haskell-distributed/distributed-process-tests
 [submodule "azure-service-api"]
 	path = azure-service-api
 	url = https://github.com/haskell-distributed/azure-service-api
