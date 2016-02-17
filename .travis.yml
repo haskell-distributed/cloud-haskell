@@ -1,19 +1,24 @@
-language: haskell
+language: c
 
 sudo: false
 cache:
   directories:
   - $HOME/.stack/
 
+matrix:
+  include:
+    - env: CABALVER=1.22 GHCVER=7.10.3
+      addons: {apt: {packages: [cabal-install-1.22,ghc-7.10.3],sources: [hvr-ghc]}}
+
 before_install:
-- mkdir -p ~/.local/bin
-- export PATH=~/.local/bin:$PATH
-- travis_retry curl -L https://github.com/commercialhaskell/stack/releases/download/v0.1.1.0/stack-0.1.1.0-x86_64-linux.gz | gunzip > ~/.local/bin/stack
-- chmod a+x ~/.local/bin/stack
+  - mkdir -p ~/.local/bin
+  - export PATH=~/.local/bin:$PATH
+  - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar -xzO --wildcards '*/stack' > ~/.local/bin/stack
+  - chmod a+x ~/.local/bin/stack
 
 install:
-  - stack setup --no-terminal
-  - stack build --only-snapshot --no-terminal
+  - stack -j 2 setup --no-terminal
+  - stack -j 2 build --only-snapshot --no-terminal
 
 script:
-  - stack build --no-terminal
+  - stack -j 2 build --no-terminal
