@@ -21,7 +21,7 @@ Bug-Reports:         http://cloud-haskell.atlassian.net/
 License:             BSD3
 License-file:        LICENSE
 Author:              Tim Watson
-Maintainer:          watson.timothy@gmail.com
+Maintainer:          Facundo Domínguez <facundo.dominguez@tweag.io>
 Category:            Control
 Build-type:          Simple
 Cabal-version:       >=1.10
