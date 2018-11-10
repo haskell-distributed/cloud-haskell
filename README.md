@@ -2,6 +2,11 @@
 
 [![Build Status](https://travis-ci.org/haskell-distributed/cloud-haskell.svg?branch=master)](https://travis-ci.org/haskell-distributed/cloud-haskell)
 
+### NB: This Meta-Package is deprecated
+
+In the age of [stack][stack], this meta-package is relatively pointless
+and is no longer being maintained.
+
 [Cloud Haskell][cloud-haskell] is a set of libraries that bring
 Erlang-style concurrency and distribution to Haskell programs.
 
